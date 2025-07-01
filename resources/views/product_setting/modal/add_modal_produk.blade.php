@@ -102,13 +102,16 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="foto_lainnya" class="form-label">Foto Lainnya (opsional)</label>
+                        <label for="foto_lainnya" class="form-label">Foto Lainnya (bisa lebih dari satu)</label>
                         <input type="file" class="form-control @error('foto_lainnya.*') is-invalid @enderror"
-                            name="foto_lainnya[]" multiple accept="image/*">
+                            name="foto_lainnya[]" id="foto_lainnya" multiple accept="image/*">
+                        <div id="foto_lainnya_preview" class="mt-2 d-flex flex-wrap gap-2"></div>
+                        <!-- Tambahkan ini -->
                         @error('foto_lainnya.*')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
+
                     <div class="mb-3">
                         <label for="status" class="form-label">Status</label>
                         <select class="form-select @error('status') is-invalid @enderror" name="status">
@@ -148,4 +151,30 @@
             preview.style.display = 'none';
         }
     }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const fotoLainnyaInput = document.getElementById('foto_lainnya');
+        const container = document.getElementById('foto_lainnya_preview');
+
+        if (fotoLainnyaInput) {
+            fotoLainnyaInput.addEventListener('change', function(event) {
+                container.innerHTML = ''; // Kosongkan preview sebelumnya
+                const files = event.target.files;
+
+                Array.from(files).forEach(file => {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.className = 'img-thumbnail';
+                        img.style.maxHeight = '100px';
+                        img.style.maxWidth = '100px';
+                        img.style.marginRight = '8px';
+                        container.appendChild(img);
+                    };
+                    reader.readAsDataURL(file);
+                });
+            });
+        }
+    });
 </script>

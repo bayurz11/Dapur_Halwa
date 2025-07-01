@@ -3,8 +3,8 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <form id="editProductForm" method="POST" enctype="multipart/form-data">
-                @csrf
-                @method('POST') {{-- Nanti diubah ke PATCH atau PUT oleh JS --}}
+                <?php echo csrf_field(); ?>
+                <?php echo method_field('POST'); ?> 
                 <div class="modal-header">
                     <h5 class="modal-title" id="editProductModalLabel">Edit Produk</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
@@ -21,9 +21,9 @@
                     <div class="mb-3">
                         <label for="edit_kategori_id" class="form-label">Kategori</label>
                         <select class="form-select" id="edit_kategori_id" name="kategori_id">
-                            @foreach ($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
-                            @endforeach
+                            <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <option value="<?php echo e($category->id); ?>"><?php echo e($category->name); ?></option>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </select>
                     </div>
 
@@ -189,3 +189,4 @@
         }
     }
 </script>
+<?php /**PATH C:\Users\bayur\OneDrive\Desktop\Dapur_Halwa\resources\views/product_setting/modal/edit_modal_product.blade.php ENDPATH**/ ?>

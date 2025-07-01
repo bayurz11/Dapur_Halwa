@@ -1,15 +1,16 @@
 <section class="popular section">
     <div class="container">
         <div class="popular_header" data-aos="fade-up">
-            <h2 class="popular_header-title"> {{ __('messages.popular header title') }} </h2>
+            <h2 class="popular_header-title"> <?php echo e(__('messages.popular header title')); ?> </h2>
             <p class="popular_header-text">
-                {{ __('messages.popular header text') }}
+                <?php echo e(__('messages.popular header text')); ?>
+
             </p>
         </div>
 
         <div class="popular_slider swiper" data-aos="fade-up" data-aos-delay="100">
             <div class="swiper-wrapper">
-                @forelse ($products as $product)
+                <?php $__empty_1 = true; $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                     <div class="popular_slider-slide swiper-slide">
                         <div class="wrapper d-flex flex-column">
                             <div class="media" style="aspect-ratio: 1/1; overflow: hidden; border-radius: 10px;">
@@ -26,21 +27,22 @@
                                     </ul>
                                 </div>
                                 <picture>
-                                    <source data-srcset="{{ asset('storage/' . $product->foto_utama) }}"
-                                        srcset="{{ asset('storage/' . $product->foto_utama) }}" type="image/webp" />
+                                    <source data-srcset="<?php echo e(asset('storage/' . $product->foto_utama)); ?>"
+                                        srcset="<?php echo e(asset('storage/' . $product->foto_utama)); ?>" type="image/webp" />
                                     <img class="lazy" style="object-fit: cover; width: 100%; height: 100%;"
-                                        data-src="{{ asset('storage/' . $product->foto_utama) }}"
-                                        src="{{ asset('storage/' . $product->foto_utama) }}"
-                                        alt="{{ $product->nama_produk }}" />
+                                        data-src="<?php echo e(asset('storage/' . $product->foto_utama)); ?>"
+                                        src="<?php echo e(asset('storage/' . $product->foto_utama)); ?>"
+                                        alt="<?php echo e($product->nama_produk); ?>" />
 
                                 </picture>
                             </div>
                             <div class="main d-flex flex-column">
                                 <a class="main_title" href="#" target="_blank">
-                                    {{ $product->nama_produk }}
+                                    <?php echo e($product->nama_produk); ?>
+
                                 </a>
                                 <div class="main_price d-flex justify-content-between align-items-center mt-2">
-                                    <span class="price mb-0">Rp {{ number_format($product->harga, 0, ',', '.') }}</span>
+                                    <span class="price mb-0">Rp <?php echo e(number_format($product->harga, 0, ',', '.')); ?></span>
 
                                     <a href="#" class="btn btn-sm btn-outline-primary">
                                         Detail Produk
@@ -50,20 +52,22 @@
 
                         </div>
                     </div>
-                @empty
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                     <div class="w-100 text-center py-5">
                         <p class="text-muted">Produk belum tersedia.</p>
                     </div>
-                @endforelse
+                <?php endif; ?>
             </div>
 
             <div class="swiper-pagination swiper-pagination--dots"></div>
         </div>
 
         <div class="d-flex justify-content-center mt-4" data-aos="fade-up" data-aos-delay="200">
-            <a href="{{ route('products') }}" class="btn btn-primary">
-                {{ __('messages.cte-btn') }}
+            <a href="<?php echo e(route('products')); ?>" class="btn btn-primary">
+                <?php echo e(__('messages.cte-btn')); ?>
+
             </a>
         </div>
     </div>
 </section>
+<?php /**PATH C:\Users\bayur\OneDrive\Desktop\Dapur_Halwa\resources\views/partials/popular_products.blade.php ENDPATH**/ ?>

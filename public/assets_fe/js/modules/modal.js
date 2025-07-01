@@ -90,176 +90,71 @@ export function triggerQuickView() {
             initModal(
                 {
                     html: `
-                     <div class="about_main d-lg-flex flex-nowrap">
-                         <span class="underlay">
-                            <span class="underlay_circle underlay_circle--accent"></span>
-                            <span class="underlay_circle underlay_circle--green"></span>
-                        </span>
-                        <div class="about_main-slider">
-                            <div class="about_main-slider--single" data-modal="true">
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
-                                        <picture>
-                                            <source data-srcset="img/placeholder.jpg"
-                                                    srcset="img/placeholder.jpg"
-                                                    type="image/webp">
-                                            <img class="lazy"
-                                                 data-src="img/placeholder.jpg"
-                                                 src="img/placeholder.jpg"
-                                                 alt="media">
-                                        </picture>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <picture>
-                                            <source data-srcset="img/placeholder.jpg"
-                                                    srcset="img/placeholder.jpg"
-                                                    type="image/webp">
-                                            <img class="lazy"
-                                                 data-src="img/placeholder.jpg"
-                                                 src="img/placeholder.jpg"
-                                                 alt="media">
-                                        </picture>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <picture>
-                                            <source data-srcset="img/placeholder.jpg"
-                                                    srcset="img/placeholder.jpg"
-                                                    type="image/webp">
-                                            <img class="lazy"
-                                                 data-src="img/placeholder.jpg"
-                                                 src="img/placeholder.jpg"
-                                                 alt="media">
-                                        </picture>
-                                    </div>
-                                </div>
-                                <div class="swiper-controls d-flex align-items-center justify-content-between">
-                                    <a class="swiper-button-prev d-inline-flex align-items-center justify-content-center" href="#">
-                                        <i class="icon-caret_left icon"></i>
-                                    </a>
-                                    <a class="swiper-button-next d-inline-flex align-items-center justify-content-center" href="#">
-                                        <i class="icon-caret_right icon"></i>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="about_main-slider--thumbs">
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
-                                        <picture>
-                                            <source data-srcset="img/placeholder.jpg"
-                                                    srcset="img/placeholder.jpg"
-                                                    type="image/webp">
-                                            <img class="lazy"
-                                                 data-src="img/placeholder.jpg"
-                                                 src="img/placeholder.jpg"
-                                                 alt="media">
-                                        </picture>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <picture>
-                                            <source data-srcset="img/placeholder.jpg"
-                                                    srcset="img/placeholder.jpg"
-                                                    type="image/webp">
-                                            <img class="lazy"
-                                                 data-src="img/placeholder.jpg"
-                                                 src="img/placeholder.jpg"
-                                                 alt="media">
-                                        </picture>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <picture>
-                                            <source data-srcset="img/placeholder.jpg"
-                                                    srcset="img/placeholder.jpg"
-                                                    type="image/webp">
-                                            <img class="lazy"
-                                                 data-src="img/placeholder.jpg"
-                                                 src="img/placeholder.jpg"
-                                                 alt="media">
-                                        </picture>
-                                    </div>
-                                </div>
-                            </div>
+                     <div class="modal_popup modal_popup--view" id="productModal">
+    <div class="about_main d-lg-flex flex-nowrap">
+        <div class="about_main-slider">
+            <div class="about_main-slider--single swiper">
+                <div class="swiper-wrapper">
+                    @foreach (json_decode($product->foto_lainnya, true) ?? [] as $foto)
+                        <div class="swiper-slide">
+                            <picture>
+                                <source srcset="{{ asset('storage/' . $foto) }}" type="image/webp">
+                                <img class="lazy" src="{{ asset('storage/' . $foto) }}" alt="{{ $product->nama_produk }}">
+                            </picture>
                         </div>
-                        <div class="about_main-info">
-                            <div class="about_main-info_product d-sm-flex align-items-center justify-content-between">
-                                <h2 class="title">Purple Suver Haze</h2>
-                            </div>
-                            <div class="about_main-info_rating d-flex flex-column flex-sm-row align-items-sm-center">
-                                <ul class="stars d-flex align-items-center accent">
-                                    <li class="stars_star">
-                                        <i class="icon-star_fill"></i>
-                                    </li>
-                                    <li class="stars_star">
-                                        <i class="icon-star_fill"></i>
-                                    </li>
-                                    <li class="stars_star">
-                                        <i class="icon-star_fill"></i>
-                                    </li>
-                                    <li class="stars_star">
-                                        <i class="icon-star_fill"></i>
-                                    </li>
-                                    <li class="stars_star">
-                                        <i class="icon-star_fill"></i>
-                                    </li>
-                                </ul>
-                                <a class="reviews-amount" href="#">(2 customer reviews)</a>
-                            </div>
-                            <p class="about_main-info_description">
-                                Elementum eu facilisis sed odio morbi quis commodo odio. Mauris rhoncus aenean vel elit
-                                scelerisque mauris pellentesque. Arcu felis bibendum ut tristique et egestas. Id semper risus in
-                                hendrerit gravida rutrum. Eu mi bibendum neque egestas congue
-                            </p>
-                            <div class="about_main-info_block d-flex flex-column flex-sm-row align-items-sm-center">
-                                <h5 class="title">Weight</h5>
-                                <ul class="weight-list list d-flex flex-wrap">
-                                    <li class="list-item">
-                                        <input type="radio" id="modalWeight1" name="modalWeight">
-                                        <label for="modalWeight1">1g</label>
-                                    </li>
-                                    <li class="list-item">
-                                        <input type="radio" id="modalWeight2" name="modalWeight">
-                                        <label for="modalWeight2">3.5g</label>
-                                    </li>
-                                    <li class="list-item">
-                                        <input type="radio" id="modalWeight3" name="modalWeight">
-                                        <label for="modalWeight3">5g</label>
-                                    </li>
-                                    <li class="list-item">
-                                        <input type="radio" id="modalWeight4" name="modalWeight">
-                                        <label for="modalWeight4">7g</label>
-                                    </li>
-                                    <li class="list-item">
-                                        <input type="radio" id="modalWeight5" name="modalWeight">
-                                        <label for="modalWeight5">14g</label>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="about_main-info_block d-flex flex-column flex-sm-row align-items-sm-center">
-                                <h5 class="title">Quantity</h5>
-                                <div class="qty d-flex align-items-center justify-content-between">
-                                        <span class="qty_minus control disabled d-flex align-items-center">
-                                            <i class="icon-minus"></i>
-                                        </span>
-                                    <input class="qty_amount" type="number" readonly value="1" min="1" max="99">
-                                    <span class="qty_plus control d-flex align-items-center">
-                                        <i class="icon-plus"></i>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="about_main-info_action d-flex flex-column flex-sm-row align-items-sm-center">
-                                <span class="about_main-info_price">$34.78</span>
-                                <a class="btn" href="#">Add to Cart</a>
-                                <div class="action d-flex">
-                                    <a class="action_link d-flex align-items-center justify-content-center" href="#" data-role="wishlist">
-                                        <i class="icon-heart"></i>
-                                    </a>
-                                    <a class="action_link d-flex align-items-center justify-content-center" href="#" data-trigger="compare">
-                                        <i class="icon-compare"></i>
-                                    </a>
-                                </div>
-                            </div>
-                            <a class="btn--underline" href="product.html">View Details</a>
+                    @endforeach
+                </div>
+                <div class="swiper-controls d-flex align-items-center justify-content-between">
+                    <a class="swiper-button-prev"><i class="icon-caret_left icon"></i></a>
+                    <a class="swiper-button-next"><i class="icon-caret_right icon"></i></a>
+                </div>
+            </div>
+            <div class="about_main-slider--thumbs swiper">
+                <div class="swiper-wrapper">
+                    @foreach (json_decode($product->foto_lainnya, true) ?? [] as $foto)
+                        <div class="swiper-slide">
+                            <picture>
+                                <source srcset="{{ asset('storage/' . $foto) }}" type="image/webp">
+                                <img class="lazy" src="{{ asset('storage/' . $foto) }}" alt="thumb">
+                            </picture>
                         </div>
-                    </div> 
+                    @endforeach
+                </div>
+            </div>
+        </div>
+
+        <div class="about_main-info">
+            <div class="about_main-info_product d-sm-flex align-items-center justify-content-between">
+                <h2 class="title">{{ $product->nama_produk }}</h2>
+            </div>
+
+            <p class="about_main-info_description">{{ $product->deskripsi }}</p>
+
+            <div class="about_main-info_block d-flex flex-column flex-sm-row align-items-sm-center">
+                <h5 class="title">Berat</h5>
+                <p class="mb-0">{{ $product->berat }} {{ $product->satuan }}</p>
+            </div>
+
+            <div class="about_main-info_block d-flex flex-column flex-sm-row align-items-sm-center">
+                <h5 class="title">Stok</h5>
+                <p class="mb-0">{{ $product->stok }}</p>
+            </div>
+
+            <div class="about_main-info_action d-flex flex-column flex-sm-row align-items-sm-center">
+                <span class="about_main-info_price">Rp {{ number_format($product->harga, 0, ',', '.') }}</span>
+                <a class="btn ms-sm-3" href="#">Tambah ke Keranjang</a>
+                <div class="action d-flex ms-sm-3">
+                    <a class="action_link d-flex align-items-center justify-content-center" href="#" data-role="wishlist">
+                        <i class="icon-heart"></i>
+                    </a>
+                </div>
+            </div>
+
+            <a class="btn--underline mt-3" href="{{ route('product.show', $product->slug) }}">Lihat Detail</a>
+        </div>
+    </div>
+</div>
+
                 `,
                 },
                 "modal_popup--view"

@@ -38,15 +38,23 @@ class ProductSettingController extends Controller
 
 
         $fotoUtamaPath = null;
-        if ($request->hasFile('foto_utama')) {
+        if ($request->hasFile('foto_utama') && $request->file('foto_utama')->isValid()) {
             $fotoUtamaPath = $request->file('foto_utama')->store('produk/foto_utama', 'public');
         }
 
         $fotoLainnyaPaths = [];
+
+        // Buat folder jika belum ada (optional)
+        if (!Storage::disk('public')->exists('produk/foto_lainnya')) {
+            Storage::disk('public')->makeDirectory('produk/foto_lainnya');
+        }
+
         if ($request->hasFile('foto_lainnya')) {
             foreach ($request->file('foto_lainnya') as $foto) {
-                $path = $foto->store('produk/foto_lainnya', 'public');
-                $fotoLainnyaPaths[] = $path;
+                if ($foto->isValid()) {
+                    $path = $foto->store('produk/foto_lainnya', 'public');
+                    $fotoLainnyaPaths[] = $path;
+                }
             }
         }
 
@@ -82,9 +90,11 @@ class ProductSettingController extends Controller
             'satuan' => 'nullable|string|max:50',
             'stok' => 'nullable|integer|min:0',
             'foto_utama' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'foto_lainnya.*' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
             'status' => 'required|in:aktif,tidak_aktif',
         ]);
 
+        // ✅ Handle foto utama
         if ($request->hasFile('foto_utama')) {
             if ($product->foto_utama) {
                 Storage::disk('public')->delete($product->foto_utama);
@@ -92,6 +102,27 @@ class ProductSettingController extends Controller
             $product->foto_utama = $request->file('foto_utama')->store('produk/foto_utama', 'public');
         }
 
+        // ✅ Handle foto lainnya - replace semuanya
+        $fotoLainnyaBaru = [];
+
+        if ($request->hasFile('foto_lainnya')) {
+            // Hapus semua foto lama
+            if ($product->foto_lainnya) {
+                $fotoLama = json_decode($product->foto_lainnya, true);
+                foreach ($fotoLama as $foto) {
+                    Storage::disk('public')->delete($foto);
+                }
+            }
+
+            foreach ($request->file('foto_lainnya') as $foto) {
+                if ($foto->isValid()) {
+                    $path = $foto->store('produk/foto_lainnya', 'public');
+                    $fotoLainnyaBaru[] = $path;
+                }
+            }
+        }
+
+        // ✅ Update data
         $product->update([
             'nama_produk' => $request->nama_produk,
             'slug' => Str::slug($request->nama_produk),
@@ -100,13 +131,16 @@ class ProductSettingController extends Controller
             'komposisi' => $request->komposisi,
             'harga' => $request->harga,
             'berat' => $request->berat,
-            'satuan' => $request->satuan,
-            'stok' => $request->stok,
+            'satuan' => $request->satuan ?? 'pcs',
+            'stok' => $request->stok ?? 0,
+            'foto_utama' => $product->foto_utama,
+            'foto_lainnya' => $fotoLainnyaBaru ? json_encode($fotoLainnyaBaru) : $product->foto_lainnya,
             'status' => $request->status,
         ]);
 
         return redirect()->route('product_setting')->with('success', 'Produk berhasil diperbarui.');
     }
+
 
     public function destroy($slug)
     {
