@@ -37,17 +37,29 @@
                             List</a>
                     </li>
 
+
+                </ul>
+            </li>
+            <li class="sidebar-menu-group-title">Article Setting</li>
+
+            <li class="dropdown">
+                <a href="javascript:void(0)">
+                    <iconify-icon icon="hugeicons:invoice-03" class="menu-icon"></iconify-icon>
+                    <span>Article</span>
+                </a>
+                <ul class="sidebar-submenu">
                     <li>
-                        <a href="invoice-add.html"><i class="ri-circle-fill circle-icon text-info-main w-auto"></i> Add
-                            new</a>
+                        <a href="{{ route('articles_category_setting') }}"><i
+                                class="ri-circle-fill circle-icon text-warning-main w-auto"></i> Categories</a>
                     </li>
+
                     <li>
-                        <a href="invoice-edit.html"><i class="ri-circle-fill circle-icon text-danger-main w-auto"></i>
-                            Edit</a>
+                        <a href="{{ route('articles_setting') }}"><i
+                                class="ri-circle-fill circle-icon text-primary-600 w-auto"></i>
+                            List</a>
                     </li>
                 </ul>
             </li>
-
             <li class="sidebar-menu-group-title">Company Setting</li>
             <li class="dropdown">
                 <a href="javascript:void(0)">

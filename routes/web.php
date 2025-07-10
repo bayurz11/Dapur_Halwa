@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ArticlesCategoriesController;
 use App\Http\Controllers\ArticlesController;
+use App\Http\Controllers\ArticlesSettingController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\AuthentiicationController;
 use App\Http\Controllers\CategoriesSettingController;
@@ -30,8 +32,6 @@ Route::get('products/detail/{slug}', [ProductController::class, 'productDetail']
 
 
 
-
-// Route::get('product/{slug}', [HomeController::class, 'productDetail'])->name('product.detail');
 
 Route::get('articles', [ArticlesController::class, 'index'])->middleware('setlocale')->name('articles');
 // Route::get('article/{slug}', [ArticlesController::class, 'articleDetail'])->middleware('setlocale')->name('article.detail');
@@ -77,4 +77,16 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/product_setting/store', [ProductSettingController::class, 'store'])->name('product_setting.store');
     Route::post('/product_setting/update/{slug}', [ProductSettingController::class, 'update'])->name('product_setting.update');
     Route::post('/product_setting/delete/{slug}', [ProductSettingController::class, 'destroy'])->name('product_setting.delete');
+
+    // Halaman artikel categories setting
+    Route::get('/articles_category_setting', [ArticlesCategoriesController::class, 'index'])->name('articles_category_setting');
+    Route::post('/articles_category_setting/store', [ArticlesCategoriesController::class, 'store'])->name('articles_category_setting.store');
+    Route::post('/articles_category_setting/update/{slug}', [ArticlesCategoriesController::class, 'update'])->name('articles_category_setting.update');
+    Route::delete('/articles_category_setting/delete/{slug}', [ArticlesCategoriesController::class, 'destroy'])->name('articles_category_setting.delete');
+
+    // Halaman artikel setting
+    Route::get('/articles_setting', [ArticlesSettingController::class, 'index'])->name('articles_setting');
+    Route::post('/articles_setting/store', [ArticlesSettingController::class, 'store'])->name('articles_setting.store');
+    Route::post('/articles_setting/update/{slug}', [ArticlesSettingController::class, 'update'])->name('articles_setting.update');
+    Route::delete('/articles_setting/delete/{slug}', [ArticlesSettingController::class, 'destroy'])->name('articles_setting.delete');
 });
