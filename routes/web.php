@@ -22,8 +22,13 @@ Route::get('/login', [AuthenticationController::class, 'index'])->name('login');
 Route::post('/login', [AuthenticationController::class, 'login'])->name('login.post');
 Route::post('/logout', [AuthenticationController::class, 'logout'])->name('logout');
 
+//Products
 Route::get('products', [ProductController::class, 'index'])->middleware('setlocale')->name('products');
-Route::get('/search', [ProductController::class, 'search'])->name('products.search');
+Route::get('products/search', [ProductController::class, 'search'])->middleware('setlocale')->name('products.search');
+Route::get('products/searchheader', [ProductController::class, 'searchheader'])->middleware('setlocale')->name('products.searchheader');
+Route::get('products/detail/{slug}', [ProductController::class, 'productDetail'])->middleware('setlocale')->name('products.detail');
+
+
 
 
 // Route::get('product/{slug}', [HomeController::class, 'productDetail'])->name('product.detail');

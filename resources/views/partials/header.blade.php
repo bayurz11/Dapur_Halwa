@@ -75,16 +75,16 @@
             <span class="line line"></span>
         </span>
         <div class="header_user d-flex justify-content-end align-items-center">
-            <form class="header_user-search" action="#" method="get" data-type="searchForm">
-                <input class="header_user-search_field field required" type="text"
-                    placeholder="{{ __('messages.Search placeholder') }}" />
+            <form class="header_user-search" id="productSearchFormhead" onsubmit="return false;">
+                <input class="header_user-search_field field required" name="search" type="text"
+                    value="{{ request('search') }}" placeholder="{{ __('messages.Search placeholder') }}" />
+
                 <button
                     class="header_user-search_btn header_user-action d-inline-flex align-items-center justify-content-center"
-                    type="submit" data-trigger="search">
+                    type="button" data-trigger="search">
                     <i class="icon-search"></i>
                 </button>
             </form>
-
             <nav class="header_nav">
                 <ul class="header_nav-list d-flex align-items-center justify-content-end pe-3">
                     @php
@@ -112,8 +112,8 @@
                                 </li>
                                 <li class="list-item nav-item">
                                     <a class="dropdown-item d-flex align-items-center" href="{{ url('/lang/en') }}">
-                                        <img src="{{ asset('assets/images/flags/united-kingdom.png') }}" alt="EN"
-                                            width="20" height="14" class="me-2">
+                                        <img src="{{ asset('assets/images/flags/united-kingdom.png') }}"
+                                            alt="EN" width="20" height="14" class="me-2">
                                         EN
                                     </a>
                                 </li>
@@ -126,3 +126,23 @@
         </div>
     </div>
 </header>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchForm = document.getElementById('productSearchFormhead');
+        const searchButton = searchForm.querySelector('[data-trigger="search"]');
+
+        searchButton.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            const searchInput = searchForm.querySelector('input[name="search"]');
+            const query = searchInput.value.trim();
+
+            if (query.length > 0) {
+                const url = "{{ route('products') }}" + "?search=" + encodeURIComponent(query);
+                window.location.href = url;
+            } else {
+                alert("Silakan masukkan kata kunci pencarian.");
+            }
+        });
+    });
+</script>

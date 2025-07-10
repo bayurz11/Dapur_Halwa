@@ -16,6 +16,9 @@
     @if (request()->routeIs('products'))
         <link rel="stylesheet" href="{{ asset('assets_fe/css/shop2.min.css') }}" />
     @endif
+    @if (request()->routeIs('products.detail'))
+        <link rel="stylesheet" href="{{ asset('assets_fe/css/product.min.css') }}" />
+    @endif
 
     @if (request()->routeIs('about'))
         <link rel="stylesheet" href="{{ asset('assets_fe/css/about.min.css') }}" />
@@ -41,6 +44,10 @@
 
     @if (request()->routeIs('products'))
         @include('partials.header_page_product')
+    @endif
+
+    @if (request()->routeIs('products.detail'))
+        @include('partials.header_page_product_detail')
     @endif
 
     @if (request()->routeIs('about'))
@@ -74,7 +81,9 @@
         Segera pesan!
     </div>
 
-
+    <script>
+        const searchActionUrl = "{{ route('products.searchheader') }}";
+    </script>
     <script src="{{ asset('assets_fe/js/common.min.js') }}"></script>
 
     <script src="{{ asset('assets_fe/js/index.min.js') }}"></script>

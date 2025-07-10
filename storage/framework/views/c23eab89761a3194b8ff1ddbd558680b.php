@@ -16,6 +16,9 @@
     <?php if(request()->routeIs('products')): ?>
         <link rel="stylesheet" href="<?php echo e(asset('assets_fe/css/shop2.min.css')); ?>" />
     <?php endif; ?>
+    <?php if(request()->routeIs('products.detail')): ?>
+        <link rel="stylesheet" href="<?php echo e(asset('assets_fe/css/product.min.css')); ?>" />
+    <?php endif; ?>
 
     <?php if(request()->routeIs('about')): ?>
         <link rel="stylesheet" href="<?php echo e(asset('assets_fe/css/about.min.css')); ?>" />
@@ -41,6 +44,10 @@
 
     <?php if(request()->routeIs('products')): ?>
         <?php echo $__env->make('partials.header_page_product', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+    <?php endif; ?>
+
+    <?php if(request()->routeIs('products.detail')): ?>
+        <?php echo $__env->make('partials.header_page_product_detail', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
     <?php endif; ?>
 
     <?php if(request()->routeIs('about')): ?>
@@ -74,7 +81,9 @@
         Segera pesan!
     </div>
 
-
+    <script>
+        const searchActionUrl = "<?php echo e(route('products.searchheader')); ?>";
+    </script>
     <script src="<?php echo e(asset('assets_fe/js/common.min.js')); ?>"></script>
 
     <script src="<?php echo e(asset('assets_fe/js/index.min.js')); ?>"></script>

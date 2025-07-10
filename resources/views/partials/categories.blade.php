@@ -3,8 +3,8 @@
         <ul class="categories_list d-flex flex-wrap justify-content-center">
             @forelse ($categories as $category)
                 <li class="categories_list-item col-6 col-md-4 col-xl-2" data-order="{{ $loop->iteration }}">
-                    <a class="categories_list-item_wrapper" href="#">
-                        {{-- {{ route('products.by_category', $category->slug) }} --}}
+                    <a class="categories_list-item_wrapper"
+                        href="{{ route('products', ['category[]' => $category->slug]) }}">
                         <div class="media">
                             <span class="overlay d-flex flex-column justify-content-end">
                                 <span class="overlay_content">{{ $category->products_count ?? '0' }} Items</span>

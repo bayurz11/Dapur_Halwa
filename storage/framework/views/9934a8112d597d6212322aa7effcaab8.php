@@ -3,8 +3,8 @@
         <ul class="categories_list d-flex flex-wrap justify-content-center">
             <?php $__empty_1 = true; $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                 <li class="categories_list-item col-6 col-md-4 col-xl-2" data-order="<?php echo e($loop->iteration); ?>">
-                    <a class="categories_list-item_wrapper" href="#">
-                        
+                    <a class="categories_list-item_wrapper"
+                        href="<?php echo e(route('products', ['category[]' => $category->slug])); ?>">
                         <div class="media">
                             <span class="overlay d-flex flex-column justify-content-end">
                                 <span class="overlay_content"><?php echo e($category->products_count ?? '0'); ?> Items</span>

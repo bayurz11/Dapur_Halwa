@@ -13,13 +13,12 @@
                     <div class="popular_slider-slide swiper-slide">
                         <div class="wrapper d-flex flex-column">
                             <div class="media" style="aspect-ratio: 1/1; overflow: hidden; border-radius: 10px;">
-
                                 <div class="overlay d-flex flex-column align-items-center justify-content-center">
                                     <ul class="action d-flex align-items-center justify-content-center">
 
                                         <li class="list-item">
                                             <a class="action_link d-flex align-items-center justify-content-center"
-                                                href="#" data-trigger="view">
+                                                href="{{ route('products.detail', $product->slug) }}">
                                                 <i class="icon-eye"></i>
                                             </a>
                                         </li>
@@ -36,13 +35,16 @@
                                 </picture>
                             </div>
                             <div class="main d-flex flex-column">
-                                <a class="main_title" href="#" target="_blank">
+                                <a class="main_title" href="{{ route('products.detail', $product->slug) }}"
+                                    target="_blank">
                                     {{ $product->nama_produk }}
                                 </a>
                                 <div class="main_price d-flex justify-content-between align-items-center mt-2">
-                                    <span class="price mb-0">Rp {{ number_format($product->harga, 0, ',', '.') }}</span>
+                                    <span class="price mb-0">Rp
+                                        {{ number_format($product->harga, 0, ',', '.') }}</span>
 
-                                    <a href="#" class="btn btn-sm btn-outline-primary">
+                                    <a href="{{ route('products.detail', $product->slug) }}"
+                                        class="btn btn-sm btn-outline-primary">
                                         Detail Produk
                                     </a>
                                 </div>
